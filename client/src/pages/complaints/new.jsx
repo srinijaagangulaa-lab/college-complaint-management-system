@@ -9,7 +9,7 @@ import {
   CheckCircle2,
   Plus,
 } from 'lucide-react';
-import axios from 'axios';
+import api from '../../services/api';
 
 const CATEGORIES = [
   'Classroom',
@@ -126,7 +126,6 @@ const NewComplaint = () => {
     setFile(null);
     setFilePreview(null);
 
-    // Clear file input
     const input = document.getElementById('complaint-attachment');
 
     if (input) {
@@ -204,11 +203,11 @@ const NewComplaint = () => {
 
       /*
        * IMPORTANT:
-       * Do NOT manually set Content-Type to application/json.
-       * Axios/browser will automatically create:
-       * multipart/form-data; boundary=...
+       * Use the configured Axios API instance.
+       * It automatically uses:
+       * https://college-complaint-backend-h286.onrender.com/api
        */
-      const response = await axios.post('/api/complaints', data, {
+      const response = await api.post('/complaints', data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -357,8 +356,8 @@ const NewComplaint = () => {
               placeholder="e.g. Projector in classroom is not working"
               maxLength={150}
               className={`w-full rounded-xl border ${errors.title
-                  ? 'border-rose-500'
-                  : 'border-slate-700'
+                ? 'border-rose-500'
+                : 'border-slate-700'
                 } bg-[#111a2d] px-5 py-4 text-white outline-none transition focus:border-indigo-500`}
             />
 
@@ -425,8 +424,8 @@ const NewComplaint = () => {
                         }))
                       }
                       className={`rounded-xl border px-3 py-3 text-xs font-bold transition ${selected
-                          ? 'border-indigo-500 bg-indigo-500/20 text-indigo-300'
-                          : 'border-slate-700 bg-[#111a2d] text-slate-400 hover:border-slate-500'
+                        ? 'border-indigo-500 bg-indigo-500/20 text-indigo-300'
+                        : 'border-slate-700 bg-[#111a2d] text-slate-400 hover:border-slate-500'
                         }`}
                     >
                       {priority.label}
@@ -457,8 +456,8 @@ const NewComplaint = () => {
               onChange={handleChange}
               placeholder="e.g. Block 3, Room 203, West Wing"
               className={`w-full rounded-xl border ${errors.location
-                  ? 'border-rose-500'
-                  : 'border-slate-700'
+                ? 'border-rose-500'
+                : 'border-slate-700'
                 } bg-[#111a2d] px-5 py-4 text-white outline-none focus:border-indigo-500`}
             />
 
@@ -485,8 +484,8 @@ const NewComplaint = () => {
               maxLength={2000}
               placeholder="Explain the problem clearly..."
               className={`w-full resize-none rounded-xl border ${errors.description
-                  ? 'border-rose-500'
-                  : 'border-slate-700'
+                ? 'border-rose-500'
+                : 'border-slate-700'
                 } bg-[#111a2d] px-5 py-4 text-white outline-none focus:border-indigo-500`}
             />
 
