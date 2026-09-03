@@ -91,8 +91,8 @@ export const AuthProvider = ({ children }) => {
 
       console.log('Login response:', response);
 
-      const loggedInUser = response?.user || response;
-      const authToken = response?.token;
+      const loggedInUser = response?.data?.user || response?.user || response;
+      const authToken = response?.data?.token || response?.token;
 
       if (!authToken) {
         throw new Error('Login successful but no authentication token was received.');
@@ -137,8 +137,8 @@ export const AuthProvider = ({ children }) => {
 
       console.log('Registration response:', response);
 
-      const registeredUser = response?.user || response;
-      const authToken = response?.token;
+      const registeredUser = response?.data?.user || response?.user || response;
+      const authToken = response?.data?.token || response?.token;
 
       if (!authToken) {
         throw new Error(
