@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const getBaseURL = () => {
   const envUrl = import.meta.env.VITE_API_URL;
+  console.log('VITE_API_URL:', envUrl);
   if (!envUrl) return '/api';
   const trimmed = envUrl.replace(/\/+$/, '');
   return trimmed.endsWith('/api') ? trimmed : `${trimmed}/api`;
