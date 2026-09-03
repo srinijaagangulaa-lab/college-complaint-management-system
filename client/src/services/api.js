@@ -15,6 +15,8 @@ const api = axios.create({
   },
 });
 
+console.log('AXIOS BASE URL:', api.defaults.baseURL);
+
 // Request interceptor: Attach JWT token
 api.interceptors.request.use(
   (config) => {
