@@ -47,6 +47,12 @@ const loginUser = async ({ email, password }) => {
     throw error;
   }
 
+  console.log('[LOGIN DEBUG]', {
+    email: user.email,
+    role: user.role,
+    passwordReceived: typeof password === 'string' && password.length > 0,
+    passwordHashExists: typeof user.passwordHash === 'string' && user.passwordHash.length > 0,
+  });
   const isMatch = await user.matchPassword(password);
   if (!isMatch) {
     const error = new Error('Invalid email or password');
